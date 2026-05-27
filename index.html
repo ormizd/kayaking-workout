@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paddle Strong — Kayak & Canoe Training</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --water: #0a3d62;
+    --deep: #071c2e;
+    --current: #1e8bc3;
+    --foam: #e8f4f8;
+    --accent: #f0a500;
+    --mist: #a8c8d8;
+    --shore: #c9884a;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--deep);
+    color: var(--foam);
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  /* Water ripple background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: 
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 40px,
+        rgba(30,139,195,0.04) 40px,
+        rgba(30,139,195,0.04) 41px
+      ),
+      radial-gradient(ellipse 120% 60% at 50% 100%, rgba(10,61,98,0.9) 0%, var(--deep) 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .hero {
+    position: relative;
+    z-index: 1;
+    padding: 60px 24px 40px;
+    text-align: center;
+    border-bottom: 1px solid rgba(30,139,195,0.2);
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-style: italic;
+    letter-spacing: 0.3em;
+    font-size: 0.75rem;
+    color: var(--mist);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3.5rem, 12vw, 7rem);
+    letter-spacing: 0.04em;
+    line-height: 0.9;
+    color: var(--foam);
+    margin-bottom: 4px;
+  }
+
+  h1 span {
+    color: var(--accent);
+    display: block;
+  }
+
+  .hero-sub {
+    font-size: 0.9rem;
+    color: var(--mist);
+    font-weight: 300;
+    margin-top: 16px;
+    max-width: 360px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+  }
+
+  /* Filter tabs */
+  .filter-bar {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    gap: 8px;
+    padding: 24px 20px 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .filter-btn {
+    background: rgba(30,139,195,0.1);
+    border: 1px solid rgba(30,139,195,0.25);
+    color: var(--mist);
+    padding: 8px 18px;
+    border-radius: 100px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    letter-spacing: 0.05em;
+  }
+
+  .filter-btn:hover, .filter-btn.active {
+    background: var(--current);
+    border-color: var(--current);
+    color: #fff;
+  }
+
+  .filter-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--deep);
+    font-weight: 600;
+  }
+
+  /* Grid */
+  .grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1px;
+    padding: 28px 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .card {
+    background: rgba(10,61,98,0.45);
+    border: 1px solid rgba(30,139,195,0.15);
+    border-radius: 12px;
+    padding: 24px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    position: relative;
+    overflow: hidden;
+    margin: 6px;
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--current), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .card:hover {
+    background: rgba(10,61,98,0.75);
+    border-color: rgba(30,139,195,0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+  }
+
+  .card:hover::before { opacity: 1; }
+
+  .card.hidden { display: none; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 14px;
+  }
+
+  .muscle-tag {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 100px;
+    background: rgba(30,139,195,0.2);
+    color: var(--mist);
+    border: 1px solid rgba(30,139,195,0.3);
+  }
+
+  .muscle-tag.core    { background: rgba(240,165,0,0.15); border-color: rgba(240,165,0,0.4); color: var(--accent); }
+  .muscle-tag.back    { background: rgba(30,139,195,0.2); border-color: rgba(30,139,195,0.4); color: #6ec6f0; }
+  .muscle-tag.arms    { background: rgba(201,136,74,0.2); border-color: rgba(201,136,74,0.4); color: var(--shore); }
+  .muscle-tag.legs    { background: rgba(80,200,120,0.15); border-color: rgba(80,200,120,0.35); color: #7dd6a0; }
+  .muscle-tag.cardio  { background: rgba(220,60,60,0.15); border-color: rgba(220,60,60,0.35); color: #f08080; }
+  .muscle-tag.shoulders { background: rgba(160,100,220,0.15); border-color: rgba(160,100,220,0.35); color: #c4a0e8; }
+
+  .exercise-icon {
+    font-size: 1.8rem;
+    line-height: 1;
+  }
+
+  .card-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 0.06em;
+    color: var(--foam);
+    margin-bottom: 6px;
+    line-height: 1;
+  }
+
+  .card-desc {
+    font-size: 0.83rem;
+    color: var(--mist);
+    font-weight: 300;
+    line-height: 1.55;
+    margin-bottom: 16px;
+  }
+
+  .card-meta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.75rem;
+    color: rgba(168,200,216,0.7);
+    font-weight: 400;
+  }
+
+  .meta-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--current);
+    flex-shrink: 0;
+  }
+
+  /* Expand detail */
+  .card-detail {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+  }
+
+  .card.open .card-detail {
+    max-height: 200px;
+  }
+
+  .detail-inner {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(30,139,195,0.15);
+  }
+
+  .detail-inner h4 {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .tips-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .tips-list li {
+    font-size: 0.8rem;
+    color: var(--mist);
+    font-weight: 300;
+    padding-left: 14px;
+    position: relative;
+    line-height: 1.45;
+  }
+
+  .tips-list li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    color: var(--current);
+    font-weight: 600;
+  }
+
+  /* Section label */
+  .section-label {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 8px 20px 0;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(168,200,216,0.5);
+    font-weight: 300;
+  }
+
+  /* Footer */
+  footer {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 24px 20px 48px;
+    font-size: 0.72rem;
+    color: rgba(168,200,216,0.35);
+    font-weight: 300;
+    letter-spacing: 0.08em;
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <p class="hero-eyebrow">Training Guide</p>
+  <h1>Paddle<span>Strong</span></h1>
+  <p class="hero-sub">Exercises built for the demands of kayaking & canoeing — power, rotation, endurance.</p>
+</div>
+
+<p class="section-label">Tap a card to expand tips · Filter by muscle group</p>
+
+<div class="filter-bar">
+  <button class="filter-btn active" onclick="filter('all', this)">All</button>
+  <button class="filter-btn" onclick="filter('core', this)">Core</button>
+  <button class="filter-btn" onclick="filter('back', this)">Back</button>
+  <button class="filter-btn" onclick="filter('arms', this)">Arms</button>
+  <button class="filter-btn" onclick="filter('shoulders', this)">Shoulders</button>
+  <button class="filter-btn" onclick="filter('legs', this)">Legs & Hip</button>
+  <button class="filter-btn" onclick="filter('cardio', this)">Cardio</button>
+</div>
+
+<div class="grid" id="grid"></div>
+
+<footer>Tap any card to expand coaching tips &nbsp;·&nbsp; Always warm up before training</footer>
+
+<script>
+const exercises = [
+  {
+    name: "Russian Twists",
+    icon: "🔄",
+    category: "core",
+    label: "Core",
+    desc: "Seated rotation with weight mimics the paddle stroke cycle. Builds rotational power essential for every stroke.",
+    sets: "3×20",
+    rest: "45 sec",
+    equipment: "Dumbbell / Med Ball",
+    tips: [
+      "Keep feet elevated to increase difficulty",
+      "Rotate from the torso, not just arms",
+      "Control the descent on each side"
+    ]
+  },
+  {
+    name: "Bent-Over Row",
+    icon: "🏋️",
+    category: "back",
+    label: "Back",
+    desc: "Trains the lats and rhomboids — the primary movers when you pull the paddle through water.",
+    sets: "4×10",
+    rest: "60 sec",
+    equipment: "Barbell / Dumbbells",
+    tips: [
+      "Hinge at the hip, flat back",
+      "Drive elbows back, not up",
+      "Squeeze shoulder blades at the top"
+    ]
+  },
+  {
+    name: "Pallof Press",
+    icon: "⚡",
+    category: "core",
+    label: "Core",
+    desc: "Anti-rotation core exercise that builds the lateral stability you need to resist boat wobble and maintain posture.",
+    sets: "3×12 each side",
+    rest: "45 sec",
+    equipment: "Cable / Resistance Band",
+    tips: [
+      "Stand perpendicular to the anchor point",
+      "Press straight out, hold 2 seconds",
+      "Don't let the cable rotate your torso"
+    ]
+  },
+  {
+    name: "Cable Face Pulls",
+    icon: "🎯",
+    category: "shoulders",
+    label: "Shoulders",
+    desc: "Strengthens the rear deltoids and rotator cuff — critical for shoulder health over long paddling sessions.",
+    sets: "3×15",
+    rest: "45 sec",
+    equipment: "Cable Machine",
+    tips: [
+      "Pull to forehead height, elbows high",
+      "Externally rotate at end of movement",
+      "Use light weight with strict form"
+    ]
+  },
+  {
+    name: "Pull-Ups / Lat Pulldowns",
+    icon: "💪",
+    category: "back",
+    label: "Back",
+    desc: "No exercise targets the lats more directly. Strong lats give you that powerful catch-and-pull paddling motion.",
+    sets: "3×8–10",
+    rest: "75 sec",
+    equipment: "Pull-up bar / Cable",
+    tips: [
+      "Full hang at the bottom each rep",
+      "Drive elbows down, not back",
+      "Avoid kipping — control the movement"
+    ]
+  },
+  {
+    name: "Plank Variations",
+    icon: "🧱",
+    category: "core",
+    label: "Core",
+    desc: "Isometric core bracing prevents energy leakage between your upper and lower body during paddling.",
+    sets: "3×30–60 sec",
+    rest: "30 sec",
+    equipment: "Bodyweight",
+    tips: [
+      "Progress to side planks and plank rows",
+      "Squeeze glutes and quads throughout",
+      "Keep hips level — no sagging or piking"
+    ]
+  },
+  {
+    name: "Dumbbell Shoulder Press",
+    icon: "🔝",
+    category: "shoulders",
+    label: "Shoulders",
+    desc: "Builds overhead shoulder strength for high-angle paddle strokes and bracing maneuvers.",
+    sets: "3×12",
+    rest: "60 sec",
+    equipment: "Dumbbells",
+    tips: [
+      "Neutral grip reduces shoulder strain",
+      "Don't arch your lower back",
+      "Control the lowering phase"
+    ]
+  },
+  {
+    name: "Hip Flexor Stretches",
+    icon: "🦵",
+    category: "legs",
+    label: "Legs & Hip",
+    desc: "Tight hip flexors from sitting in a kayak limit torso rotation. Regular stretching restores full paddle range.",
+    sets: "Hold 60 sec × 3",
+    rest: "15 sec",
+    equipment: "Bodyweight",
+    tips: [
+      "Lunge position, sink hips forward",
+      "Squeeze the glute of the back leg",
+      "Combine with thoracic rotation for full effect"
+    ]
+  },
+  {
+    name: "Medicine Ball Rotational Throw",
+    icon: "💥",
+    category: "core",
+    label: "Core",
+    desc: "Power training for explosive rotational force — mirrors the high-intensity sprint paddle stroke.",
+    sets: "3×8 each side",
+    rest: "60 sec",
+    equipment: "Med Ball + Wall",
+    tips: [
+      "Drive from the hips, not arms",
+      "Pivot your back foot on rotation",
+      "Use a solid wall or partner"
+    ]
+  },
+  {
+    name: "Tricep Pushdowns",
+    icon: "🔻",
+    category: "arms",
+    label: "Arms",
+    desc: "The triceps drive the push phase of every paddle stroke. Strong triceps improve stroke efficiency and endurance.",
+    sets: "3×15",
+    rest: "45 sec",
+    equipment: "Cable Machine",
+    tips: [
+      "Lock elbows to your sides",
+      "Full extension without flaring",
+      "Use rope attachment for wrist-friendly grip"
+    ]
+  },
+  {
+    name: "Rowing Machine Intervals",
+    icon: "🚣",
+    category: "cardio",
+    label: "Cardio",
+    desc: "The closest gym simulation of paddling. Builds aerobic base and sport-specific endurance simultaneously.",
+    sets: "8×250m sprints",
+    rest: "90 sec",
+    equipment: "Rowing Ergometer",
+    tips: [
+      "Drive with legs first, then lean back, then pull",
+      "Rate 22–26 spm for endurance intervals",
+      "Track split times to measure progress"
+    ]
+  },
+  {
+    name: "Hip 90/90 Mobility",
+    icon: "🔁",
+    category: "legs",
+    label: "Legs & Hip",
+    desc: "Opens hip rotation critical for generating power from your lower body while seated in a boat.",
+    sets: "5 min daily",
+    rest: "—",
+    equipment: "Bodyweight",
+    tips: [
+      "Sit with both knees at 90°",
+      "Rotate to forward shin and hold 2 min",
+      "Progress to active hip CARs"
+    ]
+  },
+  {
+    name: "Wrist Curl & Extension",
+    icon: "✋",
+    category: "arms",
+    label: "Arms",
+    desc: "Forearm endurance is the limiting factor for many paddlers. Prehabilitate to prevent tendinitis.",
+    sets: "3×20 each",
+    rest: "30 sec",
+    equipment: "Light Dumbbell",
+    tips: [
+      "Use very light weight (2–5 lb)",
+      "Full range of motion slowly",
+      "Do both curls AND extensions equally"
+    ]
+  },
+  {
+    name: "Bulgarian Split Squat",
+    icon: "🦶",
+    category: "legs",
+    label: "Legs & Hip",
+    desc: "Single-leg strength and hip stability improve bracing and balance — especially key for stand-up paddleboarding and canoe.",
+    sets: "3×10 each leg",
+    rest: "60 sec",
+    equipment: "Dumbbells + Bench",
+    tips: [
+      "Front shin stays vertical",
+      "Lower rear knee toward floor",
+      "Keep torso upright throughout"
+    ]
+  },
+  {
+    name: "Swimming / Swim Laps",
+    icon: "🏊",
+    category: "cardio",
+    label: "Cardio",
+    desc: "Cross-trains the paddle muscles in their natural environment. Improves water confidence as a bonus.",
+    sets: "30–45 min steady",
+    rest: "—",
+    equipment: "Pool",
+    tips: [
+      "Focus on freestyle for lat development",
+      "Add pull buoy to isolate upper body",
+      "Mix in backstroke for shoulder balance"
+    ]
+  },
+  {
+    name: "Band Pull-Aparts",
+    icon: "↔️",
+    category: "shoulders",
+    label: "Shoulders",
+    desc: "Targets the often-neglected rear deltoid and mid-traps — key for posture and injury prevention over long paddles.",
+    sets: "3×20",
+    rest: "30 sec",
+    equipment: "Resistance Band",
+    tips: [
+      "Keep arms straight throughout",
+      "Squeeze shoulder blades hard at end range",
+      "Great as a warm-up before upper body work"
+    ]
+  }
+];
+
+const grid = document.getElementById('grid');
+
+function buildCards() {
+  exercises.forEach((ex, i) => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.dataset.category = ex.category;
+    card.style.animationDelay = `${i * 0.04}s`;
+    card.innerHTML = `
+      <div class="card-header">
+        <span class="muscle-tag ${ex.category}">${ex.label}</span>
+        <span class="exercise-icon">${ex.icon}</span>
+      </div>
+      <div class="card-name">${ex.name}</div>
+      <div class="card-desc">${ex.desc}</div>
+      <div class="card-meta">
+        <span class="meta-item"><span class="meta-dot"></span>${ex.sets}</span>
+        ${ex.rest !== '—' ? `<span class="meta-item"><span class="meta-dot"></span>Rest: ${ex.rest}</span>` : ''}
+        <span class="meta-item"><span class="meta-dot"></span>${ex.equipment}</span>
+      </div>
+      <div class="card-detail">
+        <div class="detail-inner">
+          <h4>Coaching Tips</h4>
+          <ul class="tips-list">
+            ${ex.tips.map(t => `<li>${t}</li>`).join('')}
+          </ul>
+        </div>
+      </div>
+    `;
+    card.addEventListener('click', () => {
+      card.classList.toggle('open');
+    });
+    grid.appendChild(card);
+  });
+}
+
+function filter(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.card').forEach(card => {
+    if (cat === 'all' || card.dataset.category === cat) {
+      card.classList.remove('hidden');
+    } else {
+      card.classList.add('hidden');
+      card.classList.remove('open');
+    }
+  });
+}
+
+buildCards();
+</script>
+</body>
+</html>
