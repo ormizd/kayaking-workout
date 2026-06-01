@@ -18,6 +18,7 @@
     --shore: #c9884a;
     --success: #4caf50;
     --danger: #e74c3c;
+    --nutrition: #2eb87a;
   }
 
   body {
@@ -362,10 +363,7 @@
   .session-day-label { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 2px; }
   .session-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 0.06em; line-height: 1; }
 
-  /* Progress bar */
-  .session-progress-bar {
-    padding: 0 20px 16px;
-  }
+  .session-progress-bar { padding: 0 20px 16px; }
 
   .progress-track {
     height: 4px;
@@ -384,7 +382,6 @@
 
   .progress-label { font-size: 0.7rem; color: var(--mist); font-weight: 300; margin-top: 6px; }
 
-  /* Current exercise big display */
   .current-exercise {
     padding: 20px 20px 16px;
     max-width: 640px;
@@ -417,7 +414,6 @@
 
   .active-ex-desc { font-size: 0.82rem; color: var(--mist); font-weight: 300; line-height: 1.55; margin-bottom: 20px; }
 
-  /* Sets tracker */
   .sets-tracker { margin-bottom: 20px; }
   .sets-label { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; font-weight: 600; }
 
@@ -442,22 +438,14 @@
 
   .set-btn .set-num { font-size: 0.85rem; }
   .set-btn .set-check { font-size: 1rem; display: none; }
-
   .set-btn:hover { border-color: var(--current); color: var(--foam); }
-
-  .set-btn.done {
-    background: rgba(76,175,80,0.2);
-    border-color: var(--success);
-    color: var(--success);
-  }
-
+  .set-btn.done { background: rgba(76,175,80,0.2); border-color: var(--success); color: var(--success); }
   .set-btn.done .set-num { display: none; }
   .set-btn.done .set-check { display: block; }
 
   .set-reps { font-size: 0.55rem; color: var(--mist); font-weight: 300; opacity: 0.7; }
   .set-btn.done .set-reps { color: var(--success); opacity: 0.7; }
 
-  /* Timer */
   .timer-section {
     background: rgba(30,139,195,0.08);
     border: 1px solid rgba(30,139,195,0.2);
@@ -501,7 +489,6 @@
   .timer-btn.primary:hover { background: #2aa3dc; }
   .timer-btn.success { background: rgba(76,175,80,0.3); border-color: var(--success); color: var(--success); }
 
-  /* Rest timer preset buttons */
   .rest-presets { display: flex; gap: 6px; margin-bottom: 8px; }
   .rest-preset {
     flex: 1;
@@ -518,14 +505,12 @@
   }
   .rest-preset:hover, .rest-preset.selected { background: rgba(30,139,195,0.2); color: var(--foam); border-color: var(--current); }
 
-  /* Tips in session */
   .active-tips { margin-top: 2px; }
   .active-tips h4 { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 7px; }
   .active-tips ul { list-style: none; display: flex; flex-direction: column; gap: 4px; }
   .active-tips ul li { font-size: 0.78rem; color: var(--mist); font-weight: 300; padding-left: 12px; position: relative; line-height: 1.4; }
   .active-tips ul li::before { content: '›'; position: absolute; left: 0; color: var(--current); font-weight: 600; }
 
-  /* Nav buttons next/prev */
   .ex-nav {
     display: flex;
     gap: 10px;
@@ -556,7 +541,6 @@
   .ex-nav-btn.finish-btn:hover { background: #3dbb40; }
   .ex-nav-btn:disabled { opacity: 0.3; cursor: default; pointer-events: none; }
 
-  /* Queue list */
   .queue-section { padding: 0 20px 30px; max-width: 640px; margin: 0 auto; }
   .queue-label { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(168,200,216,0.45); margin-bottom: 10px; font-weight: 300; }
   .queue-list { display: flex; flex-direction: column; gap: 5px; }
@@ -582,7 +566,6 @@
   .queue-sets { font-size: 0.68rem; color: var(--mist); }
   .queue-check { color: var(--success); font-size: 0.9rem; }
 
-  /* Complete screen */
   .complete-screen {
     display: none;
     text-align: center;
@@ -621,8 +604,423 @@
 
   footer { position: relative; z-index: 1; text-align: center; padding: 20px 20px 40px; font-size: 0.7rem; color: rgba(168,200,216,0.3); font-weight: 300; letter-spacing: 0.08em; }
 
-  /* Scrollable session */
   #page-session { overflow-y: auto; }
+
+  /* ===========================
+     NUTRITION PAGE STYLES
+  =========================== */
+
+  .nutrition-hero {
+    padding: 32px 20px 24px;
+    text-align: center;
+    border-bottom: 1px solid rgba(46,184,122,0.2);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .nutrition-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 100%, rgba(46,184,122,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .nutrition-eyebrow {
+    font-weight: 300;
+    font-style: italic;
+    letter-spacing: 0.3em;
+    font-size: 0.72rem;
+    color: rgba(46,184,122,0.8);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .nutrition-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.4rem, 9vw, 4.2rem);
+    letter-spacing: 0.04em;
+    line-height: 0.9;
+    color: var(--foam);
+    margin-bottom: 12px;
+  }
+
+  .nutrition-title span { color: var(--nutrition); }
+
+  .nutrition-sub {
+    font-size: 0.82rem;
+    color: var(--mist);
+    font-weight: 300;
+    max-width: 400px;
+    margin: 0 auto;
+    line-height: 1.65;
+  }
+
+  /* Timing badge */
+  .timing-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 16px;
+    padding: 8px 18px;
+    background: rgba(46,184,122,0.12);
+    border: 1px solid rgba(46,184,122,0.3);
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--nutrition);
+    letter-spacing: 0.06em;
+  }
+
+  /* Meal tabs */
+  .meal-tabs {
+    display: flex;
+    gap: 0;
+    padding: 20px 16px 0;
+    max-width: 900px;
+    margin: 0 auto;
+    border-bottom: 1px solid rgba(46,184,122,0.15);
+  }
+
+  .meal-tab-btn {
+    flex: 1;
+    padding: 12px 8px;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--mist);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+  }
+
+  .meal-tab-btn:hover { color: var(--foam); }
+  .meal-tab-btn.active { color: var(--nutrition); border-bottom-color: var(--nutrition); }
+
+  .meal-tab-icon { display: block; font-size: 1.2rem; margin-bottom: 3px; }
+
+  /* Meal panels */
+  .meal-panels { max-width: 900px; margin: 0 auto; padding: 20px 16px; }
+
+  .meal-panel { display: none; animation: fadeUp 0.35s ease both; }
+  .meal-panel.active { display: block; }
+
+  /* Meal card */
+  .meal-card {
+    background: rgba(10,61,98,0.5);
+    border: 1px solid rgba(46,184,122,0.2);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+
+  .meal-card-header {
+    padding: 20px 22px 16px;
+    background: rgba(46,184,122,0.07);
+    border-bottom: 1px solid rgba(46,184,122,0.15);
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .meal-icon-big { font-size: 2.4rem; flex-shrink: 0; margin-top: 2px; }
+
+  .meal-card-info { flex: 1; }
+  .meal-number {
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--nutrition);
+    font-weight: 600;
+    margin-bottom: 3px;
+  }
+
+  .meal-card-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.7rem;
+    letter-spacing: 0.05em;
+    line-height: 1;
+    color: var(--foam);
+    margin-bottom: 6px;
+  }
+
+  .meal-macros {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+
+  .macro-badge {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    padding: 3px 10px;
+    border-radius: 100px;
+  }
+
+  .macro-badge.protein { background: rgba(46,184,122,0.15); border: 1px solid rgba(46,184,122,0.35); color: var(--nutrition); }
+  .macro-badge.benefit { background: rgba(30,139,195,0.15); border: 1px solid rgba(30,139,195,0.3); color: #6ec6f0; }
+
+  /* Ingredients list inside meal card */
+  .meal-ingredients { padding: 18px 22px; }
+
+  .ingredients-heading {
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(168,200,216,0.5);
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  .ingredient-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(30,139,195,0.08);
+    cursor: pointer;
+    transition: all 0.15s;
+    user-select: none;
+  }
+
+  .ingredient-row:last-child { border-bottom: none; }
+  .ingredient-row:hover { opacity: 0.85; }
+
+  .ingredient-check {
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+    border: 1.5px solid rgba(46,184,122,0.4);
+    background: rgba(46,184,122,0.05);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    font-size: 0.7rem;
+    color: transparent;
+  }
+
+  .ingredient-row.checked .ingredient-check {
+    background: var(--nutrition);
+    border-color: var(--nutrition);
+    color: #fff;
+  }
+
+  .ingredient-text { flex: 1; font-size: 0.82rem; color: var(--foam); font-weight: 300; line-height: 1.4; transition: all 0.2s; }
+  .ingredient-row.checked .ingredient-text { color: rgba(168,200,216,0.4); text-decoration: line-through; text-decoration-color: rgba(46,184,122,0.4); }
+
+  /* Recovery tips section */
+  .recovery-tips-section {
+    background: rgba(10,61,98,0.4);
+    border: 1px solid rgba(240,165,0,0.2);
+    border-radius: 16px;
+    padding: 20px 22px;
+    margin-bottom: 16px;
+  }
+
+  .recovery-tips-heading {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    margin-bottom: 14px;
+  }
+
+  .recovery-tip-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(240,165,0,0.08);
+  }
+
+  .recovery-tip-item:last-child { border-bottom: none; }
+
+  .tip-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+    margin-top: 6px;
+  }
+
+  .tip-text { font-size: 0.8rem; color: var(--mist); font-weight: 300; line-height: 1.55; }
+
+  /* ===========================
+     GROCERY LIST TAB
+  =========================== */
+
+  .grocery-section { max-width: 900px; margin: 0 auto; padding: 20px 16px 10px; }
+
+  .grocery-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .grocery-title-block {}
+  .grocery-section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    letter-spacing: 0.06em;
+    color: var(--foam);
+    line-height: 1;
+  }
+  .grocery-section-sub { font-size: 0.75rem; color: var(--mist); font-weight: 300; margin-top: 3px; }
+
+  .grocery-actions { display: flex; gap: 8px; }
+
+  .grocery-action-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 1px solid rgba(30,139,195,0.3);
+    background: rgba(30,139,195,0.1);
+    color: var(--mist);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.05em;
+  }
+
+  .grocery-action-btn:hover { background: rgba(30,139,195,0.25); color: var(--foam); }
+  .grocery-action-btn.danger { border-color: rgba(231,76,60,0.3); color: rgba(231,76,60,0.7); }
+  .grocery-action-btn.danger:hover { background: rgba(231,76,60,0.15); color: var(--danger); }
+
+  /* Progress pill */
+  .grocery-progress-pill {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(10,61,98,0.5);
+    border: 1px solid rgba(46,184,122,0.2);
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin-bottom: 20px;
+  }
+
+  .gp-icon { font-size: 1.4rem; }
+  .gp-info { flex: 1; }
+  .gp-count {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    letter-spacing: 0.06em;
+    color: var(--foam);
+    line-height: 1;
+  }
+  .gp-label { font-size: 0.7rem; color: var(--mist); font-weight: 300; }
+
+  .gp-track {
+    flex: 2;
+    height: 6px;
+    background: rgba(46,184,122,0.12);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .gp-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--nutrition), #7fe8c0);
+    border-radius: 3px;
+    transition: width 0.5s ease;
+  }
+
+  /* Category groups */
+  .grocery-category {
+    margin-bottom: 20px;
+  }
+
+  .grocery-cat-label {
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(168,200,216,0.4);
+    font-weight: 600;
+    padding: 0 4px;
+    margin-bottom: 8px;
+  }
+
+  .grocery-list-card {
+    background: rgba(10,61,98,0.45);
+    border: 1px solid rgba(30,139,195,0.12);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .grocery-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(30,139,195,0.07);
+    cursor: pointer;
+    transition: background 0.15s;
+    user-select: none;
+  }
+
+  .grocery-item:last-child { border-bottom: none; }
+  .grocery-item:hover { background: rgba(30,139,195,0.06); }
+
+  .grocery-check {
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    border: 1.5px solid rgba(46,184,122,0.35);
+    background: rgba(46,184,122,0.05);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    font-size: 0.75rem;
+    color: transparent;
+  }
+
+  .grocery-item.checked .grocery-check {
+    background: var(--nutrition);
+    border-color: var(--nutrition);
+    color: #fff;
+  }
+
+  .grocery-item-icon { font-size: 1.1rem; flex-shrink: 0; }
+
+  .grocery-item-info { flex: 1; }
+  .grocery-item-name { font-size: 0.82rem; font-weight: 400; color: var(--foam); transition: all 0.2s; }
+  .grocery-item.checked .grocery-item-name { color: rgba(168,200,216,0.35); text-decoration: line-through; text-decoration-color: rgba(46,184,122,0.4); }
+  .grocery-item-detail { font-size: 0.68rem; color: rgba(168,200,216,0.5); font-weight: 300; margin-top: 1px; }
+
+  .grocery-meal-tag {
+    font-size: 0.6rem;
+    padding: 2px 7px;
+    border-radius: 100px;
+    background: rgba(46,184,122,0.1);
+    border: 1px solid rgba(46,184,122,0.2);
+    color: var(--nutrition);
+    letter-spacing: 0.06em;
+    font-weight: 500;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .grocery-meal-tag.m2 { background: rgba(30,139,195,0.1); border-color: rgba(30,139,195,0.2); color: #6ec6f0; }
+  .grocery-meal-tag.m3 { background: rgba(240,165,0,0.1); border-color: rgba(240,165,0,0.2); color: var(--accent); }
+  .grocery-meal-tag.all { background: rgba(160,100,220,0.1); border-color: rgba(160,100,220,0.2); color: #c4a0e8; }
 </style>
 </head>
 <body>
@@ -637,6 +1035,9 @@
   </button>
   <button class="nav-tab" id="session-tab" onclick="showPage('session', this)" style="display:none">
     <span class="nav-tab-icon">▶️</span>Session
+  </button>
+  <button class="nav-tab" onclick="showPage('nutrition', this)">
+    <span class="nav-tab-icon">🥗</span>Nutrition
   </button>
 </nav>
 
@@ -683,6 +1084,210 @@
   </div>
 </div>
 
+<!-- ===== PAGE: NUTRITION ===== -->
+<div id="page-nutrition" class="page">
+
+  <div class="nutrition-hero">
+    <p class="nutrition-eyebrow">Post-Workout Recovery</p>
+    <div class="nutrition-title">Fuel &<span>Recover</span></div>
+    <p class="nutrition-sub">High-protein meals designed to replenish glycogen, reduce inflammation, and rebuild muscle after time on the water.</p>
+    <div class="timing-badge">⏱ Eat within 30–60 min after your workout</div>
+  </div>
+
+  <!-- Meal / Grocery sub-tabs -->
+  <div class="meal-tabs">
+    <button class="meal-tab-btn active" onclick="switchMealTab('meals', this)">
+      <span class="meal-tab-icon">🍽️</span>Meals
+    </button>
+    <button class="meal-tab-btn" onclick="switchMealTab('grocery', this)">
+      <span class="meal-tab-icon">🛒</span>Grocery List
+    </button>
+  </div>
+
+  <!-- MEALS PANEL -->
+  <div class="meal-panels">
+
+    <div id="meal-panel-meals" class="meal-panel active">
+
+      <!-- Meal 1 -->
+      <div class="meal-card">
+        <div class="meal-card-header">
+          <div class="meal-icon-big">🫀</div>
+          <div class="meal-card-info">
+            <div class="meal-number">Meal 01</div>
+            <div class="meal-card-name">Barbecued Lamb Heart</div>
+            <div class="meal-macros">
+              <span class="macro-badge protein">~25g Protein</span>
+              <span class="macro-badge benefit">Iron · B12 · CoQ10</span>
+              <span class="macro-badge benefit">Complex Carbs</span>
+            </div>
+          </div>
+        </div>
+        <div class="meal-ingredients">
+          <div class="ingredients-heading">Ingredients</div>
+          <div class="ingredient-row" onclick="toggleIngredient(this)">
+            <div class="ingredient-check">✓</div>
+            <div class="ingredient-text">100 g lamb heart — marinated in garlic, lemon, olive oil &amp; rosemary</div>
+          </div>
+          <div class="ingredient-row" onclick="toggleIngredient(this)">
+            <div class="ingredient-check">✓</div>
+            <div class="ingredient-text">150 g roasted sweet potato — replenishes glycogen</div>
+          </div>
+          <div class="ingredient-row" onclick="toggleIngredient(this)">
+            <div class="ingredient-check">✓</div>
+            <div class="ingredient-text">Large handful grilled zucchini &amp; capsicum — antioxidants, fibre</div>
+          </div>
+          <div class="ingredient-row" onclick="toggleIngredient(this)">
+            <div class="ingredient-check">✓</div>
+            <div class="ingredient-text">Small green salad with lemon dressing</div>
+          </div>
+          <div class="ingredient-row" onclick="toggleIngredient(this)">
+            <div class="ingredient-check">✓</div>
+            <div class="ingredient-text">Glass of water or electrolyte drink</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Meal 2 -->
+      <div class="meal-card">
+        <div class="meal-card-header">
+          <div class="meal-icon-big">🐟</div>
+          <div class="meal-card-info">
+            <div class="meal-number">Meal 02</div>
+            <div class="meal-card-name">Canned Tuna in Olive Oil</div>
+            <div class="meal-macros">
+              <span class="macro-badge protein">~27g Protein</span>
+              <span class="macro-badge benefit">Omega-3s</span>
+              <span class="macro-badge benefit">Anti-Inflammatory</span>
+            </div>
+          </div>
+        </div>
+        <div class="meal-ingredients">
+          <div class="ingredients-heading">Ingredients</div>
+          <div class="ingredient-row" onclick="toggleIngredient(this)">
+            <div class="ingredient-check">✓</div>
+            <div class="ingredient-text">100 g tuna in olive oil, drained</div>
+          </div>
+          <div class="ingredient-row" onclick="toggleIngredient(this)">
+            <div class="ingredient-check">✓</div>
+            <div class="ingredient-text">150 g cooked brown rice or quinoa — sustained energy, complete amino acids (if quinoa)</div>
+          </div>
+          <div class="ingredient-row" onclick="toggleIngredient(this)">
+            <div class="ingredient-check">✓</div>
+            <div class="ingredient-text">Half an avocado — healthy fats &amp; potassium</div>
+          </div>
+          <div class="ingredient-row" onclick="toggleIngredient(this)">
+            <div class="ingredient-check">✓</div>
+            <div class="ingredient-text">Sliced cucumber, cherry tomatoes &amp; red onion</div>
+          </div>
+          <div class="ingredient-row" onclick="toggleIngredient(this)">
+            <div class="ingredient-check">✓</div>
+            <div class="ingredient-text">Squeeze of lemon &amp; cracked black pepper</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Meal 3 -->
+      <div class="meal-card">
+        <div class="meal-card-header">
+          <div class="meal-icon-big">🍗</div>
+          <div class="meal-card-info">
+            <div class="meal-number">Meal 03</div>
+            <div class="meal-card-name">Barbecued Chicken Breast</div>
+            <div class="meal-macros">
+              <span class="macro-badge protein">~32g Protein</span>
+              <span class="macro-badge benefit">Lean Protein</span>
+              <span class="macro-badge benefit">Low Fat · Digestible</span>
+            </div>
+          </div>
+        </div>
+        <div class="meal-ingredients">
+          <div class="ingredients-heading">Ingredients</div>
+          <div class="ingredient-row" onclick="toggleIngredient(this)">
+            <div class="ingredient-check">✓</div>
+            <div class="ingredient-text">100 g chicken breast — marinated in yogurt, garlic &amp; paprika</div>
+          </div>
+          <div class="ingredient-row" onclick="toggleIngredient(this)">
+            <div class="ingredient-check">✓</div>
+            <div class="ingredient-text">150 g steamed or boiled baby potatoes</div>
+          </div>
+          <div class="ingredient-row" onclick="toggleIngredient(this)">
+            <div class="ingredient-check">✓</div>
+            <div class="ingredient-text">Steamed broccoli &amp; green beans — vitamin C, fibre, antioxidants</div>
+          </div>
+          <div class="ingredient-row" onclick="toggleIngredient(this)">
+            <div class="ingredient-check">✓</div>
+            <div class="ingredient-text">Tablespoon of hummus or tzatziki on the side</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recovery Tips -->
+      <div class="recovery-tips-section">
+        <div class="recovery-tips-heading">⚡ Recovery Tips — All Meals</div>
+        <div class="recovery-tip-item">
+          <div class="tip-dot"></div>
+          <div class="tip-text">Eat within 30–60 minutes after your workout for best recovery and muscle protein synthesis.</div>
+        </div>
+        <div class="recovery-tip-item">
+          <div class="tip-dot"></div>
+          <div class="tip-text">Always include a carb source alongside protein to replenish muscle glycogen stores.</div>
+        </div>
+        <div class="recovery-tip-item">
+          <div class="tip-dot"></div>
+          <div class="tip-text">Stay well hydrated — aim for at least 500 ml of water around your workout.</div>
+        </div>
+        <div class="recovery-tip-item">
+          <div class="tip-dot"></div>
+          <div class="tip-text">Feel free to add an olive oil drizzle to any of the meals for extra healthy fats.</div>
+        </div>
+      </div>
+
+    </div><!-- /meal-panel-meals -->
+
+    <!-- GROCERY LIST PANEL -->
+    <div id="meal-panel-grocery" class="meal-panel">
+
+      <div class="grocery-section" style="padding-top:0">
+        <div class="grocery-header-row">
+          <div class="grocery-title-block">
+            <div class="grocery-section-title">Shopping List</div>
+            <div class="grocery-section-sub">Tap items to check off as you shop</div>
+          </div>
+          <div class="grocery-actions">
+            <button class="grocery-action-btn" onclick="checkAllGrocery()">✓ All</button>
+            <button class="grocery-action-btn danger" onclick="clearAllGrocery()">↺ Reset</button>
+          </div>
+        </div>
+
+        <!-- Progress bar -->
+        <div class="grocery-progress-pill">
+          <div class="gp-icon">🛒</div>
+          <div class="gp-info">
+            <div class="gp-count" id="gp-count">0 / 20 items</div>
+            <div class="gp-label">items collected</div>
+          </div>
+          <div class="gp-track">
+            <div class="gp-fill" id="gp-fill" style="width:0%"></div>
+          </div>
+        </div>
+
+        <!-- Protein -->
+        <div class="grocery-category">
+          <div class="grocery-cat-label">🥩 Protein</div>
+          <div class="grocery-list-card" id="grocery-list"></div>
+        </div>
+
+      </div>
+
+    </div><!-- /meal-panel-grocery -->
+
+  </div><!-- /meal-panels -->
+
+  <footer style="position:relative;z-index:1">Nutrition timing matters — refuel within the golden 60-minute window</footer>
+</div><!-- /page-nutrition -->
+
+
 <script>
 // ===== DATA =====
 const exercises = [
@@ -704,13 +1309,9 @@ const exercises = [
   { name:"Band Pull-Aparts", icon:"↔️", category:"shoulders", label:"Shoulders", desc:"Targets rear deltoid and mid-traps — key for posture and injury prevention over long paddles.", sets:"3×20", rest:30, equipment:"Resistance Band", tips:["Keep arms straight throughout","Squeeze shoulder blades hard at end range","Great warm-up before upper body work"] }
 ];
 
-// 3-day plan
 const plan = [
   {
-    day: "Day A",
-    weekday: "Mon / First",
-    focus: "Back · Core · Cardio",
-    color: "#1e8bc3",
+    day: "Day A", weekday: "Mon / First", focus: "Back · Core · Cardio", color: "#1e8bc3",
     exercises: [
       exercises.findIndex(e=>e.name==="Pull-Ups / Lat Pulldowns"),
       exercises.findIndex(e=>e.name==="Bent-Over Row"),
@@ -721,10 +1322,7 @@ const plan = [
     ]
   },
   {
-    day: "Day B",
-    weekday: "Wed / Second",
-    focus: "Shoulders · Arms · Mobility",
-    color: "#f0a500",
+    day: "Day B", weekday: "Wed / Second", focus: "Shoulders · Arms · Mobility", color: "#f0a500",
     exercises: [
       exercises.findIndex(e=>e.name==="Cable Face Pulls"),
       exercises.findIndex(e=>e.name==="Band Pull-Aparts"),
@@ -735,10 +1333,7 @@ const plan = [
     ]
   },
   {
-    day: "Day C",
-    weekday: "Fri / Third",
-    focus: "Legs · Core · Full Body",
-    color: "#7dd6a0",
+    day: "Day C", weekday: "Fri / Third", focus: "Legs · Core · Full Body", color: "#7dd6a0",
     exercises: [
       exercises.findIndex(e=>e.name==="Bulgarian Split Squat"),
       exercises.findIndex(e=>e.name==="Hip 90/90 Mobility"),
@@ -749,6 +1344,49 @@ const plan = [
     ]
   }
 ];
+
+// Grocery data
+const groceryItems = [
+  // Protein
+  { id:'g1', icon:'🫀', name:'Lamb heart', detail:'~100g per serving', meal:'Meal 1', mealClass:'m1', cat:'protein' },
+  { id:'g2', icon:'🐟', name:'Canned tuna in olive oil', detail:'100g tin, drained', meal:'Meal 2', mealClass:'m2', cat:'protein' },
+  { id:'g3', icon:'🍗', name:'Chicken breast', detail:'~100g per serving', meal:'Meal 3', mealClass:'m3', cat:'protein' },
+  // Carbs
+  { id:'g4', icon:'🍠', name:'Sweet potato', detail:'~150g per serving', meal:'Meal 1', mealClass:'m1', cat:'carbs' },
+  { id:'g5', icon:'🍚', name:'Brown rice or quinoa', detail:'~150g cooked per serving', meal:'Meal 2', mealClass:'m2', cat:'carbs' },
+  { id:'g6', icon:'🥔', name:'Baby potatoes', detail:'~150g per serving, steamed or boiled', meal:'Meal 3', mealClass:'m3', cat:'carbs' },
+  // Vegetables & Salad
+  { id:'g7', icon:'🥒', name:'Zucchini', detail:'For grilling — Meal 1', meal:'Meal 1', mealClass:'m1', cat:'vegetables' },
+  { id:'g8', icon:'🫑', name:'Capsicum (bell pepper)', detail:'For grilling — Meal 1', meal:'Meal 1', mealClass:'m1', cat:'vegetables' },
+  { id:'g9', icon:'🥗', name:'Mixed salad greens', detail:'Small handful — Meal 1', meal:'Meal 1', mealClass:'m1', cat:'vegetables' },
+  { id:'g10', icon:'🥒', name:'Cucumber', detail:'Sliced — Meal 2', meal:'Meal 2', mealClass:'m2', cat:'vegetables' },
+  { id:'g11', icon:'🍅', name:'Cherry tomatoes', detail:'Handful — Meal 2', meal:'Meal 2', mealClass:'m2', cat:'vegetables' },
+  { id:'g12', icon:'🧅', name:'Red onion', detail:'Sliced — Meal 2', meal:'Meal 2', mealClass:'m2', cat:'vegetables' },
+  { id:'g13', icon:'🥦', name:'Broccoli', detail:'Steamed — Meal 3', meal:'Meal 3', mealClass:'m3', cat:'vegetables' },
+  { id:'g14', icon:'🫛', name:'Green beans', detail:'Steamed — Meal 3', meal:'Meal 3', mealClass:'m3', cat:'vegetables' },
+  // Fats & Condiments
+  { id:'g15', icon:'🥑', name:'Avocado', detail:'Half per serving — Meal 2', meal:'Meal 2', mealClass:'m2', cat:'fats' },
+  { id:'g16', icon:'🫙', name:'Hummus or tzatziki', detail:'Tablespoon on the side — Meal 3', meal:'Meal 3', mealClass:'m3', cat:'fats' },
+  { id:'g17', icon:'🫒', name:'Olive oil', detail:'For marinade & dressing — All meals', meal:'All', mealClass:'all', cat:'fats' },
+  // Pantry
+  { id:'g18', icon:'🧄', name:'Garlic', detail:'For marinades — Meals 1 & 3', meal:'M1 & M3', mealClass:'all', cat:'pantry' },
+  { id:'g19', icon:'🍋', name:'Lemon', detail:'For marinades & dressings', meal:'All meals', mealClass:'all', cat:'pantry' },
+  { id:'g20', icon:'🧂', name:'Paprika, rosemary, black pepper', detail:'Spices for marinades', meal:'All meals', mealClass:'all', cat:'pantry' },
+  // Optional
+  { id:'g21', icon:'🧘', name:'Plain yogurt', detail:'For chicken marinade — Meal 3', meal:'Meal 3', mealClass:'m3', cat:'optional' },
+  { id:'g22', icon:'⚡', name:'Electrolyte drink or powder', detail:'To pair with any meal', meal:'All meals', mealClass:'all', cat:'optional' },
+];
+
+const catLabels = {
+  protein: '🥩 Protein',
+  carbs: '🌾 Carbs & Grains',
+  vegetables: '🥦 Vegetables & Salad',
+  fats: '🥑 Fats & Condiments',
+  pantry: '🫙 Pantry & Spices',
+  optional: '✨ Optional'
+};
+
+let groceryChecked = {};
 
 // ===== STATE =====
 let currentSession = null;
@@ -853,8 +1491,6 @@ function startSession(dayIdx) {
   });
   sessionStartTime = Date.now();
   clearTimer();
-
-  // Show session tab
   document.getElementById('session-tab').style.display = '';
   showPage('session', document.getElementById('session-tab'));
   document.getElementById('complete-screen').classList.remove('show');
@@ -884,8 +1520,6 @@ function renderSession() {
   const completedSets = setsDone[exIdx].filter(Boolean).length;
   const totalDoneEx = setsDone.filter((s,i) => i < exIdx || s.every(Boolean)).length;
   const progressPct = Math.round((totalDoneEx / totalEx) * 100);
-
-  // Default rest timer to exercise's recommended rest
   selectedRest = ex.rest > 0 ? ex.rest : 45;
 
   const html = `
@@ -896,7 +1530,6 @@ function renderSession() {
         <div class="session-title">${ex.name}</div>
       </div>
     </div>
-
     <div class="session-progress-bar">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
         <span style="font-size:0.68rem;color:var(--mist);opacity:0.6">Exercise ${exIdx+1} of ${totalEx}</span>
@@ -904,7 +1537,6 @@ function renderSession() {
       </div>
       <div class="progress-track"><div class="progress-fill" style="width:${progressPct}%"></div></div>
     </div>
-
     <div class="current-exercise">
       <div class="ex-card-active">
         <div class="active-ex-top">
@@ -916,7 +1548,6 @@ function renderSession() {
           </div>
         </div>
         <div class="active-ex-desc">${ex.desc}</div>
-
         <div class="sets-tracker">
           <div class="sets-label">Sets — tap each set when done · ${repsLabel} reps/set</div>
           <div class="sets-row">
@@ -928,7 +1559,6 @@ function renderSession() {
               </button>`).join('')}
           </div>
         </div>
-
         <div class="timer-section">
           <div class="timer-label">⏱ Rest Timer</div>
           <div class="rest-presets">
@@ -940,14 +1570,12 @@ function renderSession() {
             <button class="timer-btn" onclick="resetTimer()">↺ Reset</button>
           </div>
         </div>
-
         <div class="active-tips">
           <h4>Coaching Tips</h4>
           <ul>${ex.tips.map(t=>`<li>${t}</li>`).join('')}</ul>
         </div>
       </div>
     </div>
-
     <div class="ex-nav">
       <button class="ex-nav-btn" onclick="prevExercise()" ${exIdx===0?'disabled':''}>← Prev</button>
       ${exIdx < totalEx-1
@@ -955,7 +1583,6 @@ function renderSession() {
         : `<button class="ex-nav-btn finish-btn" onclick="finishSession()">🏁 Finish Session</button>`
       }
     </div>
-
     <div class="queue-section">
       <div class="queue-label">Full workout queue</div>
       <div class="queue-list">
@@ -980,7 +1607,6 @@ function renderSession() {
 
 function toggleSet(setIdx) {
   setsDone[currentExIdx][setIdx] = !setsDone[currentExIdx][setIdx];
-  // If all sets done, auto-start rest timer
   const allDone = setsDone[currentExIdx].every(Boolean);
   renderSession();
   if (allDone && exercises[plan[currentSession].exercises[currentExIdx]].rest > 0) {
@@ -1026,10 +1652,7 @@ function selectRest(secs) {
   clearTimer();
   timerSeconds = secs;
   const disp = document.getElementById('timer-display');
-  if (disp) {
-    disp.textContent = formatTime(secs);
-    disp.className = 'timer-display';
-  }
+  if (disp) { disp.textContent = formatTime(secs); disp.className = 'timer-display'; }
   document.querySelectorAll('.rest-preset').forEach(el => {
     el.classList.toggle('selected', parseInt(el.textContent) === secs);
   });
@@ -1037,7 +1660,6 @@ function selectRest(secs) {
 
 function startTimer() {
   if (timerRunning) {
-    // Pause
     clearInterval(timerInterval);
     timerRunning = false;
     const btn = document.getElementById('timer-start-btn');
@@ -1062,7 +1684,6 @@ function startTimer() {
       disp.className = 'timer-display done-color';
       const b = document.getElementById('timer-start-btn');
       if (b) b.textContent = '▶ Start';
-      // Beep attempt
       try {
         const ctx = new (window.AudioContext || window.webkitAudioContext)();
         [0,150,300].forEach(t => {
@@ -1101,9 +1722,87 @@ function formatTime(s) {
   return m > 0 ? `${m}:${String(sec).padStart(2,'0')}` : `0:${String(sec).padStart(2,'0')}`;
 }
 
+// ===== NUTRITION PAGE =====
+
+function switchMealTab(tab, btn) {
+  document.querySelectorAll('.meal-tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.meal-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('meal-panel-' + tab).classList.add('active');
+  if (tab === 'grocery') updateGroceryProgress();
+}
+
+function toggleIngredient(row) {
+  row.classList.toggle('checked');
+}
+
+// Build grocery list
+function buildGroceryList() {
+  const cats = ['protein','carbs','vegetables','fats','pantry','optional'];
+  const container = document.querySelector('#meal-panel-grocery .grocery-section');
+
+  // Remove old category elements except header + progress pill
+  const existing = container.querySelectorAll('.grocery-category');
+  existing.forEach(el => el.remove());
+
+  cats.forEach(cat => {
+    const items = groceryItems.filter(g => g.cat === cat);
+    if (!items.length) return;
+
+    const div = document.createElement('div');
+    div.className = 'grocery-category';
+    div.innerHTML = `
+      <div class="grocery-cat-label">${catLabels[cat]}</div>
+      <div class="grocery-list-card">
+        ${items.map(item => `
+          <div class="grocery-item ${groceryChecked[item.id] ? 'checked' : ''}" data-id="${item.id}" onclick="toggleGroceryItem(this, '${item.id}')">
+            <div class="grocery-check">✓</div>
+            <div class="grocery-item-icon">${item.icon}</div>
+            <div class="grocery-item-info">
+              <div class="grocery-item-name">${item.name}</div>
+              <div class="grocery-item-detail">${item.detail}</div>
+            </div>
+            <span class="grocery-meal-tag ${item.mealClass}">${item.meal}</span>
+          </div>`).join('')}
+      </div>`;
+    container.appendChild(div);
+  });
+
+  updateGroceryProgress();
+}
+
+function toggleGroceryItem(el, id) {
+  el.classList.toggle('checked');
+  groceryChecked[id] = el.classList.contains('checked');
+  updateGroceryProgress();
+}
+
+function updateGroceryProgress() {
+  const total = groceryItems.length;
+  const done = groceryItems.filter(g => groceryChecked[g.id]).length;
+  const pct = Math.round((done / total) * 100);
+  const countEl = document.getElementById('gp-count');
+  const fillEl = document.getElementById('gp-fill');
+  if (countEl) countEl.textContent = `${done} / ${total} items`;
+  if (fillEl) fillEl.style.width = pct + '%';
+}
+
+function checkAllGrocery() {
+  groceryItems.forEach(g => { groceryChecked[g.id] = true; });
+  document.querySelectorAll('.grocery-item').forEach(el => el.classList.add('checked'));
+  updateGroceryProgress();
+}
+
+function clearAllGrocery() {
+  groceryChecked = {};
+  document.querySelectorAll('.grocery-item').forEach(el => el.classList.remove('checked'));
+  updateGroceryProgress();
+}
+
 // ===== INIT =====
 buildExerciseCards();
 buildPlanPage();
+buildGroceryList();
 </script>
 </body>
 </html>
