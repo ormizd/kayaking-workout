@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Paddle Strong — Kayak & Canoe Training</title>
+<title>Move Well — Whole Body Longevity Plan</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -193,12 +193,14 @@
     padding: 3px 9px; border-radius: 100px;
     background: rgba(30,139,195,0.2); color: var(--mist); border: 1px solid rgba(30,139,195,0.3);
   }
-  .muscle-tag.core    { background: rgba(240,165,0,0.15); border-color: rgba(240,165,0,0.4); color: var(--accent); }
-  .muscle-tag.back    { background: rgba(30,139,195,0.2); border-color: rgba(30,139,195,0.4); color: #6ec6f0; }
-  .muscle-tag.arms    { background: rgba(201,136,74,0.2); border-color: rgba(201,136,74,0.4); color: var(--shore); }
-  .muscle-tag.legs    { background: rgba(80,200,120,0.15); border-color: rgba(80,200,120,0.35); color: #7dd6a0; }
-  .muscle-tag.cardio  { background: rgba(220,60,60,0.15); border-color: rgba(220,60,60,0.35); color: #f08080; }
-  .muscle-tag.shoulders { background: rgba(160,100,220,0.15); border-color: rgba(160,100,220,0.35); color: #c4a0e8; }
+  .muscle-tag.squat    { background: rgba(240,165,0,0.15); border-color: rgba(240,165,0,0.4); color: var(--accent); }
+  .muscle-tag.hinge    { background: rgba(30,139,195,0.2); border-color: rgba(30,139,195,0.4); color: #6ec6f0; }
+  .muscle-tag.push     { background: rgba(201,136,74,0.2); border-color: rgba(201,136,74,0.4); color: var(--shore); }
+  .muscle-tag.pull     { background: rgba(80,200,120,0.15); border-color: rgba(80,200,120,0.35); color: #7dd6a0; }
+  .muscle-tag.core     { background: rgba(160,100,220,0.15); border-color: rgba(160,100,220,0.35); color: #c4a0e8; }
+  .muscle-tag.balance  { background: rgba(46,184,122,0.15); border-color: rgba(46,184,122,0.35); color: #7fe8c0; }
+  .muscle-tag.cardio   { background: rgba(220,60,60,0.15); border-color: rgba(220,60,60,0.35); color: #f08080; }
+  .muscle-tag.mobility { background: rgba(168,200,216,0.15); border-color: rgba(168,200,216,0.35); color: var(--mist); }
 
   .exercise-icon { font-size: 1.6rem; line-height: 1; }
   .card-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 0.06em; color: var(--foam); margin-bottom: 5px; line-height: 1; }
@@ -238,7 +240,7 @@
 
   .week-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 10px;
     padding: 16px;
     max-width: 960px;
@@ -1031,7 +1033,7 @@
     <span class="nav-tab-icon">🏋️</span>Exercises
   </button>
   <button class="nav-tab" onclick="showPage('plan', this)">
-    <span class="nav-tab-icon">📅</span>3-Day Plan
+    <span class="nav-tab-icon">📅</span>Weekly Plan
   </button>
   <button class="nav-tab" id="session-tab" onclick="showPage('session', this)" style="display:none">
     <span class="nav-tab-icon">▶️</span>Session
@@ -1044,32 +1046,34 @@
 <!-- ===== PAGE: EXERCISES ===== -->
 <div id="page-exercises" class="page active">
   <div class="hero">
-    <p class="hero-eyebrow">Training Guide</p>
-    <h1>Paddle<span>Strong</span></h1>
-    <p class="hero-sub">Exercises built for the demands of kayaking & canoeing — power, rotation, endurance.</p>
+    <p class="hero-eyebrow">Health & Longevity</p>
+    <h1>Move<span>Well</span></h1>
+    <p class="hero-sub">Whole-body movement for lifelong health — no equipment needed. Consistency over intensity, always.</p>
   </div>
-  <p class="section-label" style="position:relative;z-index:1">Tap a card to expand tips · Filter by muscle group</p>
+  <p class="section-label" style="position:relative;z-index:1">Tap a card to expand tips · Filter by movement pattern</p>
   <div class="filter-bar">
     <button class="filter-btn active" onclick="filterEx('all', this)">All</button>
+    <button class="filter-btn" onclick="filterEx('squat', this)">Squat</button>
+    <button class="filter-btn" onclick="filterEx('hinge', this)">Hinge</button>
+    <button class="filter-btn" onclick="filterEx('push', this)">Push</button>
+    <button class="filter-btn" onclick="filterEx('pull', this)">Pull</button>
     <button class="filter-btn" onclick="filterEx('core', this)">Core</button>
-    <button class="filter-btn" onclick="filterEx('back', this)">Back</button>
-    <button class="filter-btn" onclick="filterEx('arms', this)">Arms</button>
-    <button class="filter-btn" onclick="filterEx('shoulders', this)">Shoulders</button>
-    <button class="filter-btn" onclick="filterEx('legs', this)">Legs & Hip</button>
+    <button class="filter-btn" onclick="filterEx('balance', this)">Balance</button>
     <button class="filter-btn" onclick="filterEx('cardio', this)">Cardio</button>
+    <button class="filter-btn" onclick="filterEx('mobility', this)">Mobility</button>
   </div>
   <div class="grid" id="grid"></div>
-  <footer>Tap any card to expand coaching tips · Always warm up before training</footer>
+  <footer>Tap any card to expand coaching tips · Warm up 5 min before each session</footer>
 </div>
 
 <!-- ===== PAGE: PLAN ===== -->
 <div id="page-plan" class="page">
   <div class="plan-header" style="position:relative;z-index:1">
-    <div class="plan-title">3-Day Training Plan</div>
-    <p class="plan-sub">Structured for Mon · Wed · Fri or any 3 non-consecutive days. Each session ~45–60 min.</p>
+    <div class="plan-title">Weekly Training Plan</div>
+    <p class="plan-sub">Mon · Wed · Fri strength (30–40 min) + Tue · Sat Zone 2 cardio. Two rest days. Every session trains the whole body.</p>
   </div>
   <div class="week-grid" id="week-grid" style="position:relative;z-index:1"></div>
-  <footer style="position:relative;z-index:1">Each day targets different muscle groups for optimal recovery</footer>
+  <footer style="position:relative;z-index:1">Full-body sessions 3× per week — if you miss a day, the next session covers everything again</footer>
 </div>
 
 <!-- ===== PAGE: SESSION ===== -->
@@ -1078,7 +1082,7 @@
   <div id="complete-screen" class="complete-screen">
     <div class="complete-icon">🏆</div>
     <div class="complete-title">Session Done!</div>
-    <p class="complete-sub" id="complete-sub">Outstanding work. Your paddle power is growing.</p>
+    <p class="complete-sub" id="complete-sub">Outstanding work. Consistency like this is what drives longevity.</p>
     <div class="complete-stats" id="complete-stats"></div>
     <button class="back-plan-btn" onclick="showPage('plan', document.querySelectorAll('.nav-tab')[1])">Back to Plan</button>
   </div>
@@ -1291,58 +1295,55 @@
 <script>
 // ===== DATA =====
 const exercises = [
-  { name:"Russian Twists", icon:"🔄", category:"core", label:"Core", desc:"Seated rotation with weight mimics the paddle stroke. Builds rotational power essential for every stroke.", sets:"3×20", rest:45, equipment:"Dumbbell / Med Ball", tips:["Keep feet elevated to increase difficulty","Rotate from the torso, not just arms","Control the descent on each side"] },
-  { name:"Bent-Over Row", icon:"🏋️", category:"back", label:"Back", desc:"Trains the lats and rhomboids — the primary movers when you pull the paddle through water.", sets:"4×10", rest:60, equipment:"Barbell / Dumbbells", tips:["Hinge at the hip, flat back","Drive elbows back, not up","Squeeze shoulder blades at the top"] },
-  { name:"Pallof Press", icon:"⚡", category:"core", label:"Core", desc:"Anti-rotation core exercise that builds lateral stability to resist boat wobble and maintain posture.", sets:"3×12 each side", rest:45, equipment:"Cable / Resistance Band", tips:["Stand perpendicular to the anchor","Press straight out, hold 2 seconds","Don't let the cable rotate your torso"] },
-  { name:"Cable Face Pulls", icon:"🎯", category:"shoulders", label:"Shoulders", desc:"Strengthens rear deltoids and rotator cuff — critical for shoulder health over long paddling sessions.", sets:"3×15", rest:45, equipment:"Cable Machine", tips:["Pull to forehead height, elbows high","Externally rotate at end of movement","Use light weight with strict form"] },
-  { name:"Pull-Ups / Lat Pulldowns", icon:"💪", category:"back", label:"Back", desc:"No exercise targets the lats more directly. Strong lats give you powerful catch-and-pull paddling.", sets:"3×8–10", rest:75, equipment:"Pull-up bar / Cable", tips:["Full hang at the bottom each rep","Drive elbows down, not back","Avoid kipping — control the movement"] },
-  { name:"Plank Variations", icon:"🧱", category:"core", label:"Core", desc:"Isometric core bracing prevents energy leakage between upper and lower body during paddling.", sets:"3×45 sec", rest:30, equipment:"Bodyweight", tips:["Progress to side planks and plank rows","Squeeze glutes and quads throughout","Keep hips level — no sagging or piking"] },
-  { name:"Dumbbell Shoulder Press", icon:"🔝", category:"shoulders", label:"Shoulders", desc:"Builds overhead strength for high-angle strokes and bracing maneuvers.", sets:"3×12", rest:60, equipment:"Dumbbells", tips:["Neutral grip reduces shoulder strain","Don't arch your lower back","Control the lowering phase"] },
-  { name:"Hip Flexor Stretch", icon:"🦵", category:"legs", label:"Legs & Hip", desc:"Tight hip flexors limit torso rotation. Regular stretching restores full paddle range.", sets:"60 sec × 3 each", rest:15, equipment:"Bodyweight", tips:["Lunge position, sink hips forward","Squeeze the glute of the back leg","Combine with thoracic rotation"] },
-  { name:"Med Ball Rotational Throw", icon:"💥", category:"core", label:"Core", desc:"Power training for explosive rotational force — mirrors the high-intensity sprint stroke.", sets:"3×8 each side", rest:60, equipment:"Med Ball + Wall", tips:["Drive from the hips, not arms","Pivot your back foot on rotation","Use a solid wall or partner"] },
-  { name:"Tricep Pushdowns", icon:"🔻", category:"arms", label:"Arms", desc:"Triceps drive the push phase of every stroke. Strong triceps improve efficiency and endurance.", sets:"3×15", rest:45, equipment:"Cable Machine", tips:["Lock elbows to your sides","Full extension without flaring","Use rope attachment for wrist-friendly grip"] },
-  { name:"Rowing Machine Intervals", icon:"🚣", category:"cardio", label:"Cardio", desc:"Closest gym simulation of paddling. Builds aerobic base and sport-specific endurance.", sets:"8×250m sprints", rest:90, equipment:"Rowing Ergometer", tips:["Drive legs first, then lean back, then pull","Rate 22–26 spm for endurance","Track split times to measure progress"] },
-  { name:"Hip 90/90 Mobility", icon:"🔁", category:"legs", label:"Legs & Hip", desc:"Opens hip rotation critical for generating lower-body power while seated in a boat.", sets:"5 min daily", rest:0, equipment:"Bodyweight", tips:["Sit with both knees at 90°","Rotate to forward shin and hold 2 min","Progress to active hip CARs"] },
-  { name:"Wrist Curl & Extension", icon:"✋", category:"arms", label:"Arms", desc:"Forearm endurance is the limiting factor for many paddlers. Prehabilitate to prevent tendinitis.", sets:"3×20 each", rest:30, equipment:"Light Dumbbell", tips:["Use very light weight (2–5 lb)","Full range of motion slowly","Do both curls AND extensions equally"] },
-  { name:"Bulgarian Split Squat", icon:"🦶", category:"legs", label:"Legs & Hip", desc:"Single-leg strength and hip stability improve bracing and balance in the boat.", sets:"3×10 each leg", rest:60, equipment:"Dumbbells + Bench", tips:["Front shin stays vertical","Lower rear knee toward floor","Keep torso upright throughout"] },
-  { name:"Swimming / Swim Laps", icon:"🏊", category:"cardio", label:"Cardio", desc:"Cross-trains paddle muscles in their natural environment. Improves water confidence.", sets:"30–45 min steady", rest:0, equipment:"Pool", tips:["Focus on freestyle for lat development","Add pull buoy to isolate upper body","Mix in backstroke for shoulder balance"] },
-  { name:"Band Pull-Aparts", icon:"↔️", category:"shoulders", label:"Shoulders", desc:"Targets rear deltoid and mid-traps — key for posture and injury prevention over long paddles.", sets:"3×20", rest:30, equipment:"Resistance Band", tips:["Keep arms straight throughout","Squeeze shoulder blades hard at end range","Great warm-up before upper body work"] }
+  // SESSION A
+  { name:"Bodyweight Squats", icon:"🦵", category:"squat", label:"Squat", desc:"Keeps hips, knees, and ankles mobile and strong for everyday movement like sitting, standing, and stairs.", sets:"3×15", rest:40, equipment:"Bodyweight", tips:["Feet shoulder-width apart, chest up","Sit back like lowering into a chair","2–3 second lowering phase for extra challenge","Stop a couple of reps before form breaks down"] },
+  { name:"Glute Bridges", icon:"🌉", category:"hinge", label:"Hinge", desc:"Protects the lower back and maintains hamstring and glute strength — one of the most important patterns for longevity.", sets:"3×15", rest:40, equipment:"Bodyweight", tips:["Lie on your back, feet flat, knees bent","Drive hips up and squeeze glutes at the top","Try single-leg variation to add difficulty","Keep ribs down — don't hyperextend the lower back"] },
+  { name:"Push-Ups", icon:"💪", category:"push", label:"Push", desc:"Maintains upper body pressing strength for daily tasks — pushing doors, getting up from the floor, and more.", sets:"3×12", rest:40, equipment:"Bodyweight", tips:["Choose your level: knee, standard, or incline on a counter","Keep the body in a straight line — no sagging hips","2–3 second lowering phase","Hands slightly wider than shoulder-width"] },
+  { name:"Reverse Snow Angels", icon:"❄️", category:"pull", label:"Pull", desc:"Counterbalances pushing and screen-time posture; supports shoulder and upper back health.", sets:"3×12", rest:30, equipment:"Bodyweight", tips:["Lie face down, arms by your sides","Sweep arms up and overhead while keeping them off the floor","Squeeze shoulder blades throughout the movement","Move slowly — control matters more than range"] },
+  { name:"Plank Hold", icon:"🧱", category:"core", label:"Core", desc:"Builds the trunk stability that protects your spine during all other movement.", sets:"3×30 sec", rest:30, equipment:"Bodyweight", tips:["Work up from 20–30 seconds toward 60+","Try side plank for a different challenge","Squeeze glutes and quads throughout","No sagging hips or piked hips — keep a straight line"] },
+  { name:"Single-Leg Stand", icon:"🦩", category:"balance", label:"Balance", desc:"One of the strongest predictors of healthy aging and fall prevention — don't skip this.", sets:"3×25 sec each side", rest:20, equipment:"Bodyweight", tips:["Progress to eyes closed for more challenge","Try standing on a folded towel for an uneven surface","Keep a wall or chair nearby for safety","Gaze fixed at a point helps maintain balance"] },
+  // SESSION B
+  { name:"Walking Lunges", icon:"🚶", category:"squat", label:"Squat", desc:"Variation of the squat pattern that works single-leg stability and keeps the movement fresh.", sets:"3×10 each leg", rest:45, equipment:"Bodyweight", tips:["Step forward and lower the back knee toward the floor","Keep the front shin as vertical as possible","Drive through the front heel to step forward","Bulgarian split squat (rear foot on chair) adds more difficulty"] },
+  { name:"Single-Leg Deadlift", icon:"⚖️", category:"hinge", label:"Hinge", desc:"Builds single-leg hip strength and balance together — excellent for long-term knee and hip health.", sets:"3×10 each leg", rest:45, equipment:"Bodyweight", tips:["Hinge forward on one leg, opposite leg extends back for balance","Keep hips level — don't let one side rotate up","Maintain a neutral spine throughout","Use fingertips on a wall for support while learning"] },
+  { name:"Pike Push-Ups", icon:"🔻", category:"push", label:"Push", desc:"Shifts the pressing angle to involve the shoulders more — great for overhead strength without equipment.", sets:"3×10", rest:40, equipment:"Bodyweight", tips:["Start in a downward-dog position with hips high","Lower the top of your head toward the floor","Elbows track slightly outward","Modify by reducing the hip height if too challenging"] },
+  { name:"Prone Y-T-W Raises", icon:"✈️", category:"pull", label:"Pull", desc:"Targets the upper back and rear shoulders from a different angle — essential for posture and shoulder health.", sets:"3×10 each position", rest:30, equipment:"Bodyweight", tips:["Lie face down for all three positions","Y: arms overhead at a wide angle","T: arms straight out to the sides","W: elbows bent at 90°, draw shoulder blades together"] },
+  { name:"Bird-Dog", icon:"🐦", category:"core", label:"Core", desc:"Adds rotational and anti-rotational core strength — trains the deep stabilisers that protect your lower back.", sets:"3×10 each side", rest:30, equipment:"Bodyweight", tips:["Start on hands and knees, wrists under shoulders","Extend opposite arm and leg simultaneously","Hold briefly at the top before returning","Keep hips level — resist the urge to rotate"] },
+  { name:"Heel-to-Toe Walk", icon:"👣", category:"balance", label:"Balance", desc:"Progresses balance training with movement — builds the dynamic stability needed in everyday life.", sets:"3×12 steps", rest:20, equipment:"Bodyweight", tips:["Place heel directly in front of the opposite toe","Arms out to the sides for assistance if needed","Try with eyes closed once comfortable","Standing marches with eyes closed is a great alternative"] },
+  // CARDIO & MOBILITY
+  { name:"Zone 2 Cardio", icon:"🚶‍♂️", category:"cardio", label:"Cardio", desc:"One of the best-supported longevity interventions available — a conversation pace that's noticeably harder than rest.", sets:"20–40 min", rest:0, equipment:"None", tips:["Brisk walking, light jogging, stair climbing, or dancing at home","You should be able to talk in full sentences but not comfortably sing","Aim for 2 sessions per week (Tue & Sat)","Optionally swap one session for 20 min HIIT: 1 min easy / 30 sec hard"] },
+  { name:"Daily Mobility Routine", icon:"🌀", category:"mobility", label:"Mobility", desc:"5–10 minutes of joint mobility work keeps range of motion intact across decades of movement.", sets:"5–10 min", rest:0, equipment:"None", tips:["Neck rolls, shoulder circles, hip circles, ankle circles","Cat-cow stretch for spinal mobility","World's greatest stretch: lunge with thoracic rotation","Deep squat hold 30–60 seconds to maintain hip and ankle range"] },
 ];
 
 const plan = [
   {
-    day: "Day A", weekday: "Mon / First", focus: "Back · Core · Cardio", color: "#1e8bc3",
+    day: "Session A", weekday: "Mon / Strength", focus: "Squat · Hinge · Push · Pull · Core · Balance", color: "#1e8bc3",
     exercises: [
-      exercises.findIndex(e=>e.name==="Pull-Ups / Lat Pulldowns"),
-      exercises.findIndex(e=>e.name==="Bent-Over Row"),
-      exercises.findIndex(e=>e.name==="Russian Twists"),
-      exercises.findIndex(e=>e.name==="Pallof Press"),
-      exercises.findIndex(e=>e.name==="Med Ball Rotational Throw"),
-      exercises.findIndex(e=>e.name==="Rowing Machine Intervals")
+      exercises.findIndex(e=>e.name==="Bodyweight Squats"),
+      exercises.findIndex(e=>e.name==="Glute Bridges"),
+      exercises.findIndex(e=>e.name==="Push-Ups"),
+      exercises.findIndex(e=>e.name==="Reverse Snow Angels"),
+      exercises.findIndex(e=>e.name==="Plank Hold"),
+      exercises.findIndex(e=>e.name==="Single-Leg Stand"),
     ]
   },
   {
-    day: "Day B", weekday: "Wed / Second", focus: "Shoulders · Arms · Mobility", color: "#f0a500",
+    day: "Session B", weekday: "Wed / Strength", focus: "Squat · Hinge · Push · Pull · Core · Balance", color: "#f0a500",
     exercises: [
-      exercises.findIndex(e=>e.name==="Cable Face Pulls"),
-      exercises.findIndex(e=>e.name==="Band Pull-Aparts"),
-      exercises.findIndex(e=>e.name==="Dumbbell Shoulder Press"),
-      exercises.findIndex(e=>e.name==="Tricep Pushdowns"),
-      exercises.findIndex(e=>e.name==="Wrist Curl & Extension"),
-      exercises.findIndex(e=>e.name==="Hip Flexor Stretch")
+      exercises.findIndex(e=>e.name==="Walking Lunges"),
+      exercises.findIndex(e=>e.name==="Single-Leg Deadlift"),
+      exercises.findIndex(e=>e.name==="Pike Push-Ups"),
+      exercises.findIndex(e=>e.name==="Prone Y-T-W Raises"),
+      exercises.findIndex(e=>e.name==="Bird-Dog"),
+      exercises.findIndex(e=>e.name==="Heel-to-Toe Walk"),
     ]
   },
   {
-    day: "Day C", weekday: "Fri / Third", focus: "Legs · Core · Full Body", color: "#7dd6a0",
+    day: "Cardio Day", weekday: "Tue · Sat / Zone 2", focus: "Cardiovascular Health · Longevity", color: "#f08080",
     exercises: [
-      exercises.findIndex(e=>e.name==="Bulgarian Split Squat"),
-      exercises.findIndex(e=>e.name==="Hip 90/90 Mobility"),
-      exercises.findIndex(e=>e.name==="Plank Variations"),
-      exercises.findIndex(e=>e.name==="Bent-Over Row"),
-      exercises.findIndex(e=>e.name==="Swimming / Swim Laps"),
-      exercises.findIndex(e=>e.name==="Russian Twists")
+      exercises.findIndex(e=>e.name==="Zone 2 Cardio"),
+      exercises.findIndex(e=>e.name==="Daily Mobility Routine"),
     ]
-  }
+  },
 ];
 
 // Grocery data
@@ -1386,7 +1387,14 @@ const catLabels = {
   optional: '✨ Optional'
 };
 
-let groceryChecked = {};
+// Load persisted grocery state from localStorage, fall back to empty object
+let groceryChecked = (function() {
+  try { return JSON.parse(localStorage.getItem('paddlestrong_grocery') || '{}'); } catch(e) { return {}; }
+})();
+
+function saveGrocery() {
+  try { localStorage.setItem('paddlestrong_grocery', JSON.stringify(groceryChecked)); } catch(e) {}
+}
 
 // ===== STATE =====
 let currentSession = null;
@@ -1637,7 +1645,7 @@ function finishSession() {
   document.getElementById('session-content').innerHTML = '';
   const cs = document.getElementById('complete-screen');
   cs.classList.add('show');
-  document.getElementById('complete-sub').textContent = `You crushed ${plan[currentSession].day} — ${plan[currentSession].focus}. Keep the paddle moving!`;
+  document.getElementById('complete-sub').textContent = `You completed ${plan[currentSession].day} — ${plan[currentSession].focus}. Consistency like this is what drives longevity.`;
   document.getElementById('complete-stats').innerHTML = `
     <div class="c-stat"><div class="c-stat-val">${elapsed || '<1'}</div><div class="c-stat-lbl">Minutes</div></div>
     <div class="c-stat"><div class="c-stat-val">${plan[currentSession].exercises.length}</div><div class="c-stat-lbl">Exercises</div></div>
@@ -1774,6 +1782,7 @@ function buildGroceryList() {
 function toggleGroceryItem(el, id) {
   el.classList.toggle('checked');
   groceryChecked[id] = el.classList.contains('checked');
+  saveGrocery();
   updateGroceryProgress();
 }
 
@@ -1790,12 +1799,14 @@ function updateGroceryProgress() {
 function checkAllGrocery() {
   groceryItems.forEach(g => { groceryChecked[g.id] = true; });
   document.querySelectorAll('.grocery-item').forEach(el => el.classList.add('checked'));
+  saveGrocery();
   updateGroceryProgress();
 }
 
 function clearAllGrocery() {
   groceryChecked = {};
   document.querySelectorAll('.grocery-item').forEach(el => el.classList.remove('checked'));
+  saveGrocery();
   updateGroceryProgress();
 }
 
